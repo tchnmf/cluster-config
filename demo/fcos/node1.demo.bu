@@ -10,6 +10,7 @@ storage:
       # Set motd
     - path: /etc/motd
       mode: 0644
+      overwrite: true
       contents:
         source: https://raw.githubusercontent.com/tchnmf/cluster-config/main/demo/motd
 
