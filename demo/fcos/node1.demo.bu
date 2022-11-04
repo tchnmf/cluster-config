@@ -14,6 +14,13 @@ storage:
       contents:
         source: https://raw.githubusercontent.com/tchnmf/cluster-config/main/demo/motd
 
+    # Land kube-installation script
+    - path: /usr/local/bin/kube-install
+      mode: 0755
+      overwrite: true
+      contents:
+        source: https://raw.githubusercontent.com/tchnmf/fcos-ops/main/kube-install
+
     # CRI-O DNF module
     - path: /etc/dnf/modules.d/cri-o.module
       mode: 0644
@@ -52,6 +59,33 @@ storage:
         inline: |
           net.bridge.bridge-nf-call-iptables=1
           net.ipv4.ip_forward=1
+
+systemd:
+  units:
+    - name: hello.service
+      enabled: true
+      contents: |
+        [Unit]
+        Description=A hello world unit!
+        [Service]
+        Type=oneshot
+        RemainAfterExit=yes
+        ExecStart=/usr/bin/echo "Hello, World!"
+        [Install]
+        WantedBy=multi-user.target
+
+    - name: kube-install.service
+      enabled: true
+      contents: |
+        [Unit]
+        Description=Kube installation unit!
+        [Service]
+        Type=oneshot
+        RemainAfterExit=yes
+        ExecStart=/usr/bin/kube-install
+        [Install]
+        WantedBy=multi-user.target
+
 passwd: # setting login credentials
   users:
     - name: core
