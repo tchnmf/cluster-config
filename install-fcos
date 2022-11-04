@@ -26,7 +26,7 @@
 echo "Enter /path/to/<file>.ign:"
 read IGN_CONFIG
 
-enter "Enter FCOS VM Name:"
+echo "Enter FCOS VM Name:"
 read VM_NAME
 
 
