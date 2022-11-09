@@ -1,5 +1,6 @@
 ---
 apiVersion: kubeadm.k8s.io/v1beta3
+clusterName: "white-widow"
 kind: ClusterConfiguration
 kubernetesVersion: v1.24.0
 controllerManager:
