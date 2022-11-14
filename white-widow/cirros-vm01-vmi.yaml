@@ -3,7 +3,7 @@
 apiVersion: kubevirt.io/v1
 kind: VirtualMachineInstance
 metadata:
-  name: testvmi-cirros
+  name: cirros-vm01.white-widow
 spec:
   terminationGracePeriodSeconds: 30
   domain:
@@ -29,8 +29,11 @@ spec:
     emptyDisk:
       capacity: "2Gi"
   - name: cloudinitdisk
-    cloudInitNoCloud:
+    cloudInitConfigDrive:
       userData: |-
         #cloud-config
         password: fedora
         chpasswd: { expire: False }
+        ssh_authorized_keys:
+          - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILUcbIaaK/Gq+UDa551OHGWZdFhuSmog4AEV3qFLLBsm core@node1.white-widow
+          - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOpbPHVNgXkqWCrrxm/5hg8OmxOnPUiVXILdqn3M46Dj white-widow@t470.brq
